@@ -1,0 +1,295 @@
+/* ===== Property Detail Panel ===== */
+#property-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--panel-width);
+    height: 100%;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-glass);
+    z-index: var(--z-panel);
+    transform: translateX(100%);
+    transition: transform var(--duration-slow) var(--ease-out);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(0,0,0,0.4);
+}
+
+#property-panel.panel-open {
+    transform: translateX(0);
+}
+
+.panel-close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    background: var(--bg-glass);
+    backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+}
+
+.panel-close:hover {
+    background: var(--bg-glass-hover);
+    color: var(--text-primary);
+}
+
+.panel-close svg {
+    width: 16px;
+    height: 16px;
+}
+
+.panel-content {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0;
+}
+
+/* Panel Header / Image section */
+.panel-hero {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, var(--accent-bg), var(--bg-elevated));
+    overflow: hidden;
+}
+
+.panel-hero-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, var(--bg-secondary), transparent);
+}
+
+.panel-hero-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-glass);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: blur(12px);
+}
+
+.panel-hero-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--accent-light);
+}
+
+.panel-hero-badge {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+}
+
+.panel-hero-badge.risk-low {
+    background: var(--risk-low-bg);
+    color: var(--risk-low);
+    border: 1px solid var(--risk-low-border);
+}
+.panel-hero-badge.risk-medium {
+    background: var(--risk-medium-bg);
+    color: var(--risk-medium);
+    border: 1px solid var(--risk-medium-border);
+}
+.panel-hero-badge.risk-high {
+    background: var(--risk-high-bg);
+    color: var(--risk-high);
+    border: 1px solid var(--risk-high-border);
+}
+
+/* Panel body */
+.panel-body {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.panel-title {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.panel-address {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.panel-address svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* Property details grid */
+.panel-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.panel-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+}
+
+.panel-detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.panel-detail-value {
+    font-size: var(--font-base);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.panel-detail-value.price {
+    color: var(--accent-light);
+}
+
+/* Section headers */
+.panel-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-sm);
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-md);
+}
+
+.panel-section-title svg {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-light);
+}
+
+/* Report button */
+.panel-report-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--accent-bg), rgba(99, 102, 241, 0.2));
+    color: var(--accent-light);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+}
+
+.panel-report-btn:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.3));
+    box-shadow: var(--shadow-glow-accent);
+    transform: translateY(-1px);
+}
+
+.panel-report-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Workflow */
+.workflow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.workflow-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    animation: slideInLeft var(--duration-slow) var(--ease-out) both;
+}
+
+.workflow-step-dot {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-glass);
+}
+
+.workflow-step-dot.completed {
+    background: var(--risk-low-bg);
+    border-color: var(--risk-low-border);
+}
+
+.workflow-step-dot.completed svg {
+    width: 14px;
+    height: 14px;
+    color: var(--risk-low);
+}
+
+.workflow-step-line {
+    width: 2px;
+    height: 12px;
+    background: var(--border-glass);
+    margin-left: 13px;
+}
+
+.workflow-step-text {
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+}
+
+.workflow-step-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}

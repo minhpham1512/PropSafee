@@ -1,0 +1,98 @@
+/* ===== Risk Gauge ===== */
+.gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+}
+
+.gauge-svg {
+    width: 160px;
+    height: 160px;
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: var(--bg-glass);
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.2s var(--ease-out), stroke 0.3s ease;
+}
+
+.gauge-fill.risk-low { stroke: var(--risk-low); }
+.gauge-fill.risk-medium { stroke: var(--risk-medium); }
+.gauge-fill.risk-high { stroke: var(--risk-high); }
+
+.gauge-center {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.gauge-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge-score {
+    font-size: var(--font-3xl);
+    font-weight: 900;
+    line-height: 1;
+}
+
+.gauge-score.risk-low { color: var(--risk-low); }
+.gauge-score.risk-medium { color: var(--risk-medium); }
+.gauge-score.risk-high { color: var(--risk-high); }
+
+.gauge-max {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.gauge-label {
+    font-size: var(--font-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gauge-label.risk-low { color: var(--risk-low); }
+.gauge-label.risk-medium { color: var(--risk-medium); }
+.gauge-label.risk-high { color: var(--risk-high); }
+
+.gauge-desc {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 200px;
+}
+
+/* Glow effect behind gauge */
+.gauge-glow {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.gauge-glow.risk-low { background: var(--risk-low); }
+.gauge-glow.risk-medium { background: var(--risk-medium); }
+.gauge-glow.risk-high { background: var(--risk-high); }

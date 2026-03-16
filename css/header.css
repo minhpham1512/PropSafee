@@ -1,0 +1,113 @@
+/* ===== Header ===== */
+#app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 var(--space-xl);
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+    z-index: var(--z-header);
+    position: relative;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
+    border-radius: var(--radius-md);
+    color: white;
+    box-shadow: var(--shadow-glow-accent);
+    animation: glow 3s ease-in-out infinite;
+}
+
+.logo-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text h1 {
+    font-size: var(--font-lg);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #f1f5f9, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-tagline {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Header Stats */
+.header-stats {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-glass);
+    transition: all var(--duration-fast) ease;
+}
+
+.stat-item:hover {
+    border-color: var(--border-glass-hover);
+    transform: translateY(-1px);
+}
+
+.stat-item svg {
+    width: 15px;
+    height: 15px;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-size: var(--font-base);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.stat-safe svg { color: var(--risk-low); }
+.stat-safe .stat-value { color: var(--risk-low); }
+.stat-warning svg { color: var(--risk-medium); }
+.stat-warning .stat-value { color: var(--risk-medium); }
+.stat-danger svg { color: var(--risk-high); }
+.stat-danger .stat-value { color: var(--risk-high); }
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}

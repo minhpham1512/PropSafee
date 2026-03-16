@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropSafe — Phân Tích Rủi Ro Bất Động Sản</title>
+    <meta name="description" content="PropSafe giúp người mua bất động sản đánh giá rủi ro pháp lý, thị trường, môi trường và gian lận trước khi giao dịch.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- App Styles -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/panel.css">
+    <link rel="stylesheet" href="css/gauge.css">
+    <link rel="stylesheet" href="css/breakdown.css">
+    <link rel="stylesheet" href="css/compare.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header id="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>PropSafe</h1>
+                        <span class="logo-tagline">Real Estate Risk Intelligence</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-stats">
+                    <div class="stat-item" id="stat-total">
+                        <i data-lucide="building-2"></i>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Bất động sản</span>
+                    </div>
+                    <div class="stat-item stat-safe" id="stat-safe">
+                        <i data-lucide="check-circle-2"></i>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">An toàn</span>
+                    </div>
+                    <div class="stat-item stat-warning" id="stat-warning">
+                        <i data-lucide="alert-triangle"></i>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Cảnh báo</span>
+                    </div>
+                    <div class="stat-item stat-danger" id="stat-danger">
+                        <i data-lucide="alert-octagon"></i>
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Nguy hiểm</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-icon" id="btn-theme" title="Chuyển giao diện">
+                    <i data-lucide="moon"></i>
+                </button>
+                <button class="btn-icon" id="btn-compare" title="So sánh 2 BĐS">
+                    <i data-lucide="columns-2"></i>
+                </button>
+                <button class="btn-primary" id="btn-api">
+                    <i data-lucide="code-2"></i>
+                    <span>API</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="app-main">
+            <!-- Sidebar -->
+            <aside id="sidebar">
+                <div class="sidebar-search">
+                    <div class="search-box">
+                        <i data-lucide="search"></i>
+                        <input type="text" id="search-input" placeholder="Tìm bất động sản..." autocomplete="off">
+                    </div>
+                </div>
+                <div class="sidebar-filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="filter-dot dot-all"></span>
+                        Tất cả
+                    </button>
+                    <button class="filter-btn" data-filter="low">
+                        <span class="filter-dot dot-low"></span>
+                        An toàn
+                    </button>
+                    <button class="filter-btn" data-filter="medium">
+                        <span class="filter-dot dot-medium"></span>
+                        Trung bình
+                    </button>
+                    <button class="filter-btn" data-filter="high">
+                        <span class="filter-dot dot-high"></span>
+                        Cao
+                    </button>
+                </div>
+                <div class="sidebar-list" id="property-list">
+                    <!-- Property cards injected here -->
+                </div>
+                <div class="sidebar-footer">
+                    <div class="agent-status">
+                        <div class="pulse-dot"></div>
+                        <span>5 AI Agents đang hoạt động</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Map -->
+            <div id="map-container">
+                <div id="map"></div>
+                <div class="map-overlay" id="map-overlay">
+                    <div class="map-legend">
+                        <span class="legend-title">Mức rủi ro</span>
+                        <div class="legend-items">
+                            <div class="legend-item"><span class="legend-color" style="background: var(--risk-low)"></span>Thấp (0-35)</div>
+                            <div class="legend-item"><span class="legend-color" style="background: var(--risk-medium)"></span>Trung bình (36-65)</div>
+                            <div class="legend-item"><span class="legend-color" style="background: var(--risk-high)"></span>Cao (66-100)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Detail Panel -->
+            <div id="property-panel" class="panel-closed">
+                <button class="panel-close" id="panel-close">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="panel-content" id="panel-content">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/data/properties.js"></script>
+    <script src="js/services/legalAgent.js"></script>
+    <script src="js/services/marketAgent.js"></script>
+    <script src="js/services/environmentAgent.js"></script>
+    <script src="js/services/behaviorAgent.js"></script>
+    <script src="js/services/orchestrator.js"></script>
+    <script src="js/components/gauge.js"></script>
+    <script src="js/components/breakdown.js"></script>
+    <script src="js/components/panel.js"></script>
+    <script src="js/components/sidebar.js"></script>
+    <script src="js/components/map.js"></script>
+    <script src="js/components/compare.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

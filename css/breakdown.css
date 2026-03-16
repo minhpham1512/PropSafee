@@ -1,0 +1,120 @@
+/* ===== Risk Breakdown ===== */
+.breakdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.breakdown-card {
+    padding: var(--space-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    transition: all var(--duration-fast) ease;
+    animation: scaleIn var(--duration-slow) var(--ease-out) both;
+}
+
+.breakdown-card:hover {
+    border-color: var(--border-glass-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.breakdown-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+}
+
+.breakdown-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+}
+
+.breakdown-card-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.breakdown-card-icon.legal {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+.breakdown-card-icon.market {
+    background: rgba(6, 182, 212, 0.15);
+    color: #22d3ee;
+}
+.breakdown-card-icon.environment {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+.breakdown-card-icon.fraud {
+    background: rgba(244, 63, 94, 0.15);
+    color: #fb7185;
+}
+
+.breakdown-card-score {
+    font-size: var(--font-md);
+    font-weight: 800;
+}
+
+.breakdown-card-score.risk-low { color: var(--risk-low); }
+.breakdown-card-score.risk-medium { color: var(--risk-medium); }
+.breakdown-card-score.risk-high { color: var(--risk-high); }
+
+.breakdown-card-title {
+    font-size: var(--font-xs);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+/* Score bar */
+.breakdown-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--bg-glass);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+}
+
+.breakdown-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 1s var(--ease-out);
+}
+
+.breakdown-bar-fill.risk-low { background: var(--risk-low); }
+.breakdown-bar-fill.risk-medium { background: var(--risk-medium); }
+.breakdown-bar-fill.risk-high { background: var(--risk-high); }
+
+/* Findings list */
+.breakdown-findings {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.breakdown-finding {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.breakdown-finding-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.breakdown-finding-icon.positive { color: var(--risk-low); }
+.breakdown-finding-icon.negative { color: var(--risk-high); }
+.breakdown-finding-icon.neutral { color: var(--risk-medium); }
